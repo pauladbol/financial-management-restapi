@@ -1,19 +1,12 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-const app = express()
-const port = 3000
-
-app.use(bodyParser.json())
-app.use(
-  bodyParser.urlencoded({
-    extended: true,
-  })
-)
+import app from './config/custom-express';
+import pool from './config/db-connection';
 
 app.get('/', (request, response) => {
-    response.json({ info: 'Node.js, Express, and Postgres API' })
-})
-
-app.listen(port, () => {
-    console.log(`App running on port ${port}.`)
+    pool.query('SELECT * FROM users ORDER BY id ASC', (error, results) => {
+        if (error) {
+          throw error
+        }
+        response.status(200).json(results.rows)
+      })
+    // response.json({ info: 'Node.js, Express, and Postgres API' })
 })
