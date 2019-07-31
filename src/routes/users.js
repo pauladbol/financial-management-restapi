@@ -21,7 +21,9 @@ module.exports = (app) => {
     });
 
     app.post('/users', async (req, res) => {
-        res.status(501).send('Not Implemented');
+        const user = await postUser(req.body);
+        console.log(user);
+        res.status(200).send(user);
     });
 
     app.put('/users/:id', async (req, res) => {

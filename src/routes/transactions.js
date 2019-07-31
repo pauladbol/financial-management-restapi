@@ -1,4 +1,4 @@
-import { getAllTransactions, getTransaction } from '../controllers/transactions';
+import { getAllTransactions, getTransaction, postTransaction } from '../controllers/transactions';
 
 module.exports = (app) => {
 
@@ -18,6 +18,16 @@ module.exports = (app) => {
         } catch (error) {
             res.status(500).send(error.message);
         }
+    });
+
+    app.post('/transactions', async (req, res) => {
+        const transactions = await postTransaction(req.body);
+        console.log(transactions);
+        res.status(200).send(transactions);
+    });
+
+    app.put('/transactions/:id', async (req, res) => {
+        res.status(501).send('Not Implemented');
     });
     
 }

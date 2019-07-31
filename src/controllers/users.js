@@ -9,9 +9,9 @@ export const getUser = (id) => {
 };
 
 export const postUser = (user) => {
-    return createUser().then(result => result);
+    return createUser(user).then(result => result);
 }
 
 export const putUser = (id) => {
-    return updateUser().then(result => result);
+    return updateUser(id).then(result => result);
 }

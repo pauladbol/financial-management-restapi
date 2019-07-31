@@ -11,7 +11,10 @@ export const listUser = async (id) => {
 }
 
 export const createUser = async (user) => {
-    return 'Not implemented';
+    const result = pool.query('INSERT INTO users (name, username, password, email, created_on, last_login) VALUES ($1, $2, $3, $4, $5, $6)', 
+                    [user.name, user.username, user.password, user.email, user.created_on, user.last_login]);
+                    
+    return result;
 }
 
 export const updateUser = async (id) => {
